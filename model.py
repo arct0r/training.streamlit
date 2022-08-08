@@ -25,8 +25,8 @@ ex_muscle_groups = {
     'leg_press' : ['legs'],
     'db_bench_press' : ['chest', 'triceps', 'shoulders'],
     '1arm_crossover' : ['chest'],
-    'pullups_bw' : ['back', 'biceps']
-
+    'pullups_bw' : ['back', 'biceps'],
+    'nordic_curl' : ['legs']
 }
 
 def toWeekDay(num):
