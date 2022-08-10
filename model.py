@@ -271,6 +271,7 @@ class other(Base):
 def createApp():
     DB_NAME = "database"
     url = 'mysql://sql11512029:hHGENBFyPB@sql11.freemysqlhosting.net/sql11512029'
+    
     engine = create_engine(url)
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind = engine) #this is to connect to the db (engine)
