@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 from model import Exercise, Cardio, other, FitnessGoal, improvementTable, calendarExercises, fill
-from main_page import createApp
+from model import createApp
 
 sess = createApp()
 

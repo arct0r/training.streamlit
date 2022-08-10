@@ -3,7 +3,7 @@ from model import ex_muscle_groups
 from model import Cardio, FitnessGoal, createApp, Exercise, other
 from datetime import datetime
 import streamlit as st
-from main_page import sess
+from model import createApp
 
 sess = createApp()
 
