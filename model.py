@@ -269,12 +269,15 @@ class other(Base):
         ).all()
 
 def createApp():
-    DB_NAME = "database.db"
+    DB_NAME = "database"
 
     engine = create_engine(F'sqlite:///{DB_NAME}.sqlite3?check_same_thread=False')
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind = engine) #this is to connect to the db (engine)
     sess = Session()
+
+
+
     return sess
 
 
