@@ -6,6 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from os import path
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta, date
+import mysql.connector
 
 
 Base = declarative_base()
@@ -270,8 +271,8 @@ class other(Base):
 
 def createApp():
     DB_NAME = "database"
-    url = 'mysql://sql11512029:hHGENBFyPB@sql11.freemysqlhosting.net/sql11512029'
-    
+    url = 'mysql+mysqlconnector://sql11512029:hHGENBFyPB@sql11.freemysqlhosting.net/sql11512029'
+
     engine = create_engine(url)
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind = engine) #this is to connect to the db (engine)
