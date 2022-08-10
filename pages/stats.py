@@ -3,7 +3,9 @@ import pandas as pd
 import numpy as np
 
 from model import Exercise, Cardio, other, FitnessGoal, improvementTable, calendarExercises, fill
-from main_page import sess
+from main_page import createApp
+
+sess = createApp()
 
 
 st.markdown("# stats")

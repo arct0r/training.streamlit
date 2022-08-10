@@ -270,8 +270,8 @@ class other(Base):
 
 def createApp():
     DB_NAME = "database"
-
-    engine = create_engine(F'sqlite:///{DB_NAME}.sqlite3?check_same_thread=False')
+    url = 'mysql://sql11512029:hHGENBFyPB@sql11.freemysqlhosting.net/sql11512029'
+    engine = create_engine(url)
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind = engine) #this is to connect to the db (engine)
     sess = Session()

@@ -2,6 +2,8 @@ from time import timezone
 from model import ex_muscle_groups
 from model import Cardio, FitnessGoal, createApp, Exercise, other
 from datetime import datetime
+import streamlit as st
+from main_page import sess
 
 sess = createApp()
 
@@ -31,6 +33,7 @@ def stringChecker(String):
         return 'focus'
 
     elif start == 'set':
+
         return 'goal'
 
 def goalExtractor(String):
