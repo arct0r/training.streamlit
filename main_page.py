@@ -3,24 +3,20 @@ from model import ex_muscle_groups
 from interprete import stringChecker, exEstractor
 from sqlalchemy import create_engine
 from model import createApp
-import streamlit as st
+import streamlit as st  
+
 
 def main_page():
     st.markdown("# terminal")
 
 def page2():
     st.markdown("# stats")
-
+ 
 page_names_to_funcs = {
     "terminal": main_page,
     "stats": page2,
 }
 
-
-
-
-
-sess = createApp()
 
 st.markdown("# terminal")
 st.sidebar.markdown("# terminal")
