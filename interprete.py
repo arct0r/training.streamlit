@@ -43,7 +43,12 @@ def goalExtractor(String):
     weight = String[2][:-2]
     reps = String[3][1:]
 
-    FitnessGoal.addFitnessGoal(name, weight, reps, sess)
+    try:
+        FitnessGoal.addFitnessGoal(name, weight, reps, sess)
+        sess.commit()
+    except:
+        sess.rollback()
+        raise
 
 def cardioExtractor(String):
     #cardio zone 2 30min cyclette
@@ -57,7 +62,12 @@ def cardioExtractor(String):
     medium = String[0]
 
     newCardio = Cardio(zone = zone, duration = duration, medium = medium, date = datetime.now())
-    newCardio.addCardio(sess)
+    try:
+        newCardio.addCardio(sess)
+        sess.commit()
+    except:
+        sess.rollback()
+        raise
 
 def focusExtractor(String):
     #focus 30min
@@ -66,8 +76,12 @@ def focusExtractor(String):
     time = String[0][:-3]
 
     newFocus = other(name = 'focus', duration = time, date = datetime.now())
-    newFocus.addOther(sess)
-
+    try:
+        newFocus.addOther(sess)
+        sess.commit()
+    except:
+        sess.rollback()
+        raise
 
 def lines_exEstractor(String):
     for line in String.split("\n"):
@@ -90,5 +104,10 @@ def exEstractor(String):
     reps = String[2].split("x")[1]
     
     ex = Exercise(name = name, reps = reps, sets = sets, weight = weight, date = datetime.now())
-    ex.addExercise(sess)
+    try:
+        ex.addExercise(sess)
+        sess.commit()
+    except:
+        sess.rollback()
+        raise
 
