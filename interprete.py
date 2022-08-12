@@ -28,7 +28,8 @@ def stringChecker(String):
         return lines_exEstractor(initialString)
     if ex_muscle_groups[start]:
         print("adding res")
-        return exEstractor(String)
+        exAdded = exEstractor(String)
+        return exAdded
     elif start == 'focus':
         return 'focus'
 
@@ -87,6 +88,7 @@ def lines_exEstractor(String):
     for line in String.split("\n"):
         exEstractor(line)
 
+
 def exEstractor(String):
     #type 1: dips 100kg 3x5
 
@@ -107,6 +109,8 @@ def exEstractor(String):
     try:
         ex.addExercise(sess)
         sess.commit()
+        return f"Added {ex.name} {ex.weight}kg {ex.sets}x{ex.reps}"
+
     except:
         sess.rollback()
         raise

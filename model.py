@@ -7,28 +7,28 @@ from os import path
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime, timedelta, date
 import mysql.connector
+import streamlit as st
+import pickle
+
+
+def ex_muscles_reset():
+    ex_muscle_groups = pickle.load(open("ex_groups", "rb"))
+    print(ex_muscle_groups)
+    return ex_muscle_groups
 
 
 Base = declarative_base()
-ex_muscle_groups = {
-    'dips': ['chest', 'triceps', 'shoulders'],
-    'ohp_kb' : ['shoulders', 'triceps'],
-    'pullups' : ['back', 'biceps'],
-    'chinups' : ['back', 'biceps'],
-    'squat' : ['legs'],
-    'deadlift' : ['legs', 'back'],
-    'bent_over_rows' : ['back', 'biceps'],
-    'triceps_extensions' : ['triceps'],
-    'bicep_curl' : ['biceps'],
-    'leg_curl' : ['legs'],
-    'split_squats' : ['legs'],
-    't_bar_rows' : ['back', 'biceps'],
-    'leg_press' : ['legs'],
-    'db_bench_press' : ['chest', 'triceps', 'shoulders'],
-    '1arm_crossover' : ['chest'],
-    'pullups_bw' : ['back', 'biceps'],
-    'nordic_curl' : ['legs']
-}
+ex_muscle_groups = ex_muscles_reset()
+
+
+
+def newEx_muscleGroup(exName, musclesUsed):
+    currentLib = pickle.load(open("ex_groups", "rb"))
+    currentLib[exName] = musclesUsed
+
+    pickle.dump(currentLib, open("ex_groups", "wb"))
+    ex_muscle_groups = ex_muscles_reset()
+
 
 def toWeekDay(num):
     days = { 
@@ -271,7 +271,11 @@ class other(Base):
 
 def createApp():
     DB_NAME = "database"
-    url = 'mysql+mysqlconnector://sql11512029:hHGENBFyPB@sql11.freemysqlhosting.net/sql11512029'
+    host = st.secrets.mysql.host
+    database = st.secrets.mysql.database
+    user = st.secrets.mysql.user
+    password = st.secrets.mysql.password
+    url = f'mysql+mysqlconnector://{user}:{password}@{host}/{database}'
 
     engine = create_engine(url)
     Base.metadata.create_all(engine)

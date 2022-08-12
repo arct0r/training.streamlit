@@ -1,5 +1,5 @@
 from datetime import datetime
-from model import ex_muscle_groups
+from model import ex_muscle_groups, newEx_muscleGroup, ex_muscles_reset
 from interprete import stringChecker, exEstractor
 from sqlalchemy import create_engine
 from model import createApp
@@ -37,10 +37,28 @@ if submit and name:
         st.error(e)
         
 
+col1, col2 = st.columns(2)
+
+with col1:
+    with st.expander("Terminal instructions"):
+        st.markdown(md)
+with col2:
+    with st.expander("add an exercise"):
+
+        st.markdown("### Add an exercise")
+        exName = st.text_input("exercise name")
+        options = st.multiselect(
+            'Pick the muscle it works',
+            ['chest', 'back', 'shoulders', 'triceps', 'biceps', 'legs'])
+        muscleButton = st.button("add exercise")
+        exName, options
+
+        if muscleButton and exName and options:
+            newEx_muscleGroup(exName, options)
+            st.success('exercise added!')
 
 
 
-st.markdown(md)
-
-"**Exercise List**"
-st.json(ex_muscle_groups, expanded = True)
+ex_muscle_groups = ex_muscles_reset()
+"**Current Exercise List**"
+st.json(ex_muscle_groups, expanded = False)
